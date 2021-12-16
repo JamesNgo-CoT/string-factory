@@ -14,24 +14,24 @@ function cleanup() {
 function browserEs5Build() {
 	return gulp.src('src/**/*.js')
 		.pipe(gulpPreProcess({ context: { TARGET: 'BROWSER', BROWSER: true } }))
-		.pipe(gulp.dest('dist/browser/es5'))
+		.pipe(gulp.dest('dist/es5'))
 		.pipe(gulpRename((path) => path.basename = path.basename + '.min'))
 		.pipe(gulpSourceMaps.init())
 		.pipe(gulpBabel())
 		.pipe(gulpUglify())
 		.pipe(gulpSourceMaps.write('.'))
-		.pipe(gulp.dest('dist/browser/es5'));
+		.pipe(gulp.dest('dist/es5'));
 }
 
 function browserEs6Build() {
 	return gulp.src('src/**/*.js')
 		.pipe(gulpPreProcess({ context: { TARGET: 'BROWSER', BROWSER: true } }))
-		.pipe(gulp.dest('dist/browser/es6'))
+		.pipe(gulp.dest('dist/es6'))
 		.pipe(gulpRename((path) => path.basename = path.basename + '.min'))
 		.pipe(gulpSourceMaps.init())
 		.pipe(gulpTerser())
 		.pipe(gulpSourceMaps.write('.'))
-		.pipe(gulp.dest('dist/browser/es6'));
+		.pipe(gulp.dest('dist/es6'));
 }
 
 function nodeBuild() {

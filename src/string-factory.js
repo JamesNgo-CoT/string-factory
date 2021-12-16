@@ -125,3 +125,6 @@ function expLoop(loopExp, body, joiner = '') {
 // @if TARGET='NODE'
 module.exports = { exp, expIf, expLoop, func, quote, style, table, tag };
 // @endif
+// @if TARGET='BROWSER'
+/* exported exp, expIf, expLoop, func, quote, style, table, tag */
+// @endif

@@ -106,6 +106,7 @@ function func(args, body) {
 	if (Array.isArray(args)) {
 		args = args.filter((child) => child !== null).join(', ');
 	}
+
 	return `(${args || ''}) => ${body}`;
 }
 

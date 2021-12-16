@@ -106,6 +106,7 @@ function func(args, body) {
 	if (Array.isArray(args)) {
 		args = args.filter((child) => child !== null).join(', ');
 	}
+
 	return `(${args || ''}) => ${body}`;
 }
 
@@ -121,3 +122,4 @@ function expLoop(loopExp, body, joiner = '') {
 	return exp(`(() => { const expLoopValue = []; for(${loopExp}) { expLoopValue.push(${body}); } return expLoopValue.join(${quote(joiner)}); })()`);
 }
 
+/* exported exp, expIf, expLoop, func, quote, style, table, tag */
