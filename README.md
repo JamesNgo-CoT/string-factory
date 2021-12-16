@@ -11,7 +11,7 @@ npm install git+https://github.com/JamesNgo-CoT/string-factory.git#1.0.0
 ## Usage
 
 ``` JavaScript
-const { exp, expIf, expLoop, func, quote, table, tag } = require('node-string-factory');
+const { exp, expIf, expLoop, func, quote, table, tag } = require('string-factory');
 ```
 
 ### tag
