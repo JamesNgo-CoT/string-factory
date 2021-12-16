@@ -5,7 +5,7 @@ Version 1.0.0
 ## Installation
 
 ```
-npm install git+https://github.com/JamesNgo-CoT/node-string-factory.git#2.1.0
+npm install git+https://github.com/JamesNgo-CoT/string-factory.git#1.0.0
 ```
 
 ## Usage
