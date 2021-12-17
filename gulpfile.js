@@ -13,7 +13,7 @@ function cleanup() {
 
 function browserEs5Build() {
 	return gulp.src('src/**/*.js')
-		.pipe(gulpPreProcess({ context: { TARGET: 'BROWSER', BROWSER: true } }))
+		.pipe(gulpPreProcess({ context: { TARGET: 'BROWSER' } }))
 		.pipe(gulp.dest('dist/es5'))
 		.pipe(gulpRename((path) => path.basename = path.basename + '.min'))
 		.pipe(gulpSourceMaps.init())
@@ -25,7 +25,7 @@ function browserEs5Build() {
 
 function browserEs6Build() {
 	return gulp.src('src/**/*.js')
-		.pipe(gulpPreProcess({ context: { TARGET: 'BROWSER', BROWSER: true } }))
+		.pipe(gulpPreProcess({ context: { TARGET: 'BROWSER' } }))
 		.pipe(gulp.dest('dist/es6'))
 		.pipe(gulpRename((path) => path.basename = path.basename + '.min'))
 		.pipe(gulpSourceMaps.init())
@@ -36,12 +36,18 @@ function browserEs6Build() {
 
 function nodeBuild() {
 	return gulp.src('src/**/*.js')
-		.pipe(gulpPreProcess({ context: { TARGET: 'NODE', NODE: true } }))
+		.pipe(gulpPreProcess({ context: { TARGET: 'NODE' } }))
 		.pipe(gulp.dest('dist/node'));
 }
 
 const build = gulp.parallel(nodeBuild, browserEs5Build, browserEs6Build);
 
+function watch() {
+	console.log('\x1b[2mPress ^C at any time to quit.\x1b[0m');
+	gulp.watch('src/**/*.js', build);
+}
+
 module.exports = {
-	build: gulp.series(cleanup, build)
+	build: gulp.series(cleanup, build),
+	watch: gulp.series(cleanup, build, watch),
 };

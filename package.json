@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp build",
+    "watch": "gulp watch",
     "test": "node ./test/node/index"
   },
   "repository": {
