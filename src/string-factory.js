@@ -1,32 +1,6 @@
-function quote(value, quote = '`') {
-	if (Array.isArray(value)) {
-		value = value.join('');
-	}
+const StringFactory = {};
 
-	if (typeof value !== 'string') {
-		value = String(value);
-	}
-
-	const exps = [];
-	value = value
-		.replace(new RegExp('{{ (.+?) }}', 'g'), (match, p1) => {
-			exps.push(p1);
-			return '{{ }}';
-		})
-		.replace(new RegExp(`\\\\${quote}`, 'g'), `\\\\${quote}`)
-		.replace(new RegExp(`${quote}`, 'g'), `\\${quote}`)
-		.replace(new RegExp('{{ }}', 'g'), () => {
-			if (quote === '`') {
-				return `\${${exps.shift()}}`;
-			} else {
-				return `${quote} + (${exps.shift()}) + ${quote}`;
-			}
-		});
-
-	return `${quote}${value}${quote}`;
-}
-
-function tag(tag, attrs, children) {
+StringFactory.tag = (tag, attrs, children) => {
 	const openTagContents = [tag];
 	if (attrs) {
 		if (Array.isArray(attrs)) {
@@ -42,7 +16,7 @@ function tag(tag, attrs, children) {
 				} else if (attrs[key] === null) {
 					openTagContents.push(key);
 				} else {
-					openTagContents.push(`${key}=${quote(attrs[key], '"')}`);
+					openTagContents.push(`${key}=${StringFactory.quote(attrs[key], '"')}`);
 				}
 			}
 		}
@@ -59,18 +33,18 @@ function tag(tag, attrs, children) {
 	}
 
 	return `${openTag}${children}</${tag}>`;
-}
+};
 
-function table(attrs, caption, thead, tbody, tfoot) {
-	return tag('table', attrs, [
-		tag('caption', {}, caption),
-		thead ? tag('thead', {}, thead) : null,
-		tag('tbody', {}, tbody),
-		tfoot ? tag('tfoot', {}, tfoot) : null
+StringFactory.table = (attrs, caption, thead, tbody, tfoot) => {
+	return StringFactory.tag('table', attrs, [
+		StringFactory.tag('caption', {}, caption),
+		thead ? StringFactory.tag('thead', {}, thead) : null,
+		StringFactory.tag('tbody', {}, tbody),
+		tfoot ? StringFactory.tag('tfoot', {}, tfoot) : null
 	]);
-}
+};
 
-function style(properties) {
+StringFactory.style = (properties) => {
 	function processProperties(properties) {
 		const value = [];
 
@@ -102,31 +76,59 @@ function style(properties) {
 	}
 
 	return processProperties(properties).join(' ');
-}
+};
 
-function func(args, body) {
+StringFactory.quote = (value, quote = '`') => {
+	if (Array.isArray(value)) {
+		value = value.join('');
+	}
+
+	if (typeof value !== 'string') {
+		value = String(value);
+	}
+
+	const exps = [];
+	value = value
+		.replace(new RegExp('{{ (.+?) }}', 'g'), (match, p1) => {
+			exps.push(p1);
+			return '{{ }}';
+		})
+		.replace(new RegExp(`\\\\${quote}`, 'g'), `\\\\${quote}`)
+		.replace(new RegExp(`${quote}`, 'g'), `\\${quote}`)
+		.replace(new RegExp('{{ }}', 'g'), () => {
+			if (quote === '`') {
+				return `\${${exps.shift()}}`;
+			} else {
+				return `${quote} + (${exps.shift()}) + ${quote}`;
+			}
+		});
+
+	return `${quote}${value}${quote}`;
+};
+
+StringFactory.func = (args, body) => {
 	if (Array.isArray(args)) {
 		args = args.filter((child) => child !== null).join(', ');
 	}
 
 	return `(${args || ''}) => ${body}`;
-}
+};
 
-function exp(value) {
+StringFactory.exp = (value) => {
 	return `{{ ${value} }}`;
-}
+};
 
-function expIf(condition, trueValue, falseValue) {
-	return exp(`${condition} ? ${trueValue} : ${falseValue}`);
-}
+StringFactory.expIf = (condition, trueValue, falseValue) => {
+	return StringFactory.exp(`${condition} ? ${trueValue} : ${falseValue}`);
+};
 
-function expLoop(loopExp, body, joiner = '') {
-	return exp(`(() => { const expLoopValue = []; for(${loopExp}) { expLoopValue.push(${body}); } return expLoopValue.join(${quote(joiner)}); })()`);
-}
+StringFactory.expLoop = (loopExp, body, joiner = '') => {
+	return StringFactory.exp(`(() => { const expLoopValue = []; for(${loopExp}) { expLoopValue.push(${body}); } return expLoopValue.join(${StringFactory.quote(joiner)}); })()`);
+};
 
 // @if TARGET='NODE'
-module.exports = { exp, expIf, expLoop, func, quote, style, table, tag };
+module.exports = StringFactory;
 // @endif
 // @if TARGET='BROWSER'
-/* exported exp, expIf, expLoop, func, quote, style, table, tag */
+/* exported stringFactory */
 // @endif

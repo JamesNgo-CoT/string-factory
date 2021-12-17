@@ -1,4 +1,4 @@
-const { exp, expIf, expLoop, func, quote, style, table, tag } = require('../../dist/node/string-factory');
+const { exp, expIf, expLoop, func, quote, style, table, tag } = require('../../index');
 
 
 ////////////////////////////////////////////////////////////////////////////////
