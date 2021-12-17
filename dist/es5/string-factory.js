@@ -37,9 +37,11 @@ function tag(tag, attrs, children) {
 			openTagContents.push(attrs);
 		} else {
 			for (const key in attrs) {
-				if (attrs[key] === null) {
+				if (attrs[key] === undefined) {
+					// DO NOTHING
+				} else if (attrs[key] === null) {
 					openTagContents.push(key);
-				} else if (attrs[key]) {
+				} else {
 					openTagContents.push(`${key}=${quote(attrs[key], '"')}`);
 				}
 			}
