@@ -6,7 +6,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 (() => {
-	document.write('<h2>TAG</H2>');
 	console.log('%cTAG', 'color: cyan;');
 
 	const content = tag('div', { class: 'class-name' }, [
@@ -17,7 +16,6 @@
 		])
 	]);
 
-	document.write(content);
 	console.log(content);
 })();
 
