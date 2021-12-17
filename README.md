@@ -1,11 +1,11 @@
 # string-factory
 
-Version 1.0.1
+Version 1.0.2
 
 ## Installation
 
 ```
-npm install git+https://github.com/JamesNgo-CoT/string-factory.git#1.0.0
+npm install git+https://github.com/JamesNgo-CoT/string-factory.git#1.0.2
 ```
 
 ## Usage
