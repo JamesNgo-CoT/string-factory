@@ -1,3 +1,1 @@
-const stringFactory = require('./dist/node/string-factory');
-
-module.exports = stringFactory;
+module.exports = require('./dist/node/string-factory');
