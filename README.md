@@ -12,13 +12,13 @@ npm install git+https://github.com/JamesNgo-CoT/string-factory.git#1.0.2
 
 ``` JavaScript
 // NodeJS
-const { exp, expIf, expLoop, func, quote, table, tag } = require('string-factory');
+const { tag, table, style, quote, func, exp, expIf, expLoop } = require('string-factory');
 
 // or
 
 // Browser
 /* global StringFactory */
-const { exp, expIf, expLoop, func, quote, table, tag } = StringFactory;
+const { tag, table, style, quote, func, exp, expIf, expLoop } = StringFactory;
 ```
 
 ### tag

@@ -1,4 +1,4 @@
-const { exp, expIf, expLoop, func, quote, style, table, tag } = require('../../index');
+const { tag, table, style, quote, func, exp, expIf, expLoop } = require('../../index');
 
 
 ////////////////////////////////////////////////////////////////////////////////

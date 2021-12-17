@@ -1,6 +1,6 @@
 /* global StringFactory */
 
-const { exp, expIf, expLoop, func, quote, style, table, tag } = StringFactory;
+const { tag, table, style, quote, func, exp, expIf, expLoop } = StringFactory;
 
 ////////////////////////////////////////////////////////////////////////////////
 // TAG
