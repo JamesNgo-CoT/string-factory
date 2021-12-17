@@ -1,6 +1,6 @@
 # string-factory
 
-Version 1.0.2
+Version 2.0.0
 
 ## Installation
 
@@ -11,7 +11,14 @@ npm install git+https://github.com/JamesNgo-CoT/string-factory.git#1.0.2
 ## Usage
 
 ``` JavaScript
+// NodeJS
 const { exp, expIf, expLoop, func, quote, table, tag } = require('string-factory');
+
+// or
+
+// Browser
+/* global StringFactory */
+const { exp, expIf, expLoop, func, quote, table, tag } = StringFactory;
 ```
 
 ### tag
