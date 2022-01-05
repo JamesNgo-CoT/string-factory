@@ -1,1 +1,1 @@
-module.exports = require('./dist/node/string-factory');
+module.exports = require('./dist/node/string-factory.js');

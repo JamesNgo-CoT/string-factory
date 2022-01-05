@@ -128,12 +128,4 @@ const StringFactory = (() => {
 	return { tag, table, style, quote, func, exp, expIf, expLoop };
 })();
 
-/* @if MODULE="COMMONJS" */
-module.exports = StringFactory;
-/* @endif */
-/* @if MODULE=null **
-/* exported StringFactory */
-/* @endif */
-/* @if MODULE="ES6" **
 export default StringFactory;
-/* @endif */

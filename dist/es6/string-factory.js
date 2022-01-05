@@ -128,4 +128,4 @@ const StringFactory = (() => {
 	return { tag, table, style, quote, func, exp, expIf, expLoop };
 })();
 
-/* exported stringFactory */
+/* exported StringFactory */
