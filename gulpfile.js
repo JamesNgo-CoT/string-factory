@@ -1,11 +1,15 @@
 const del = require('del');
+const fs = require('fs');
 const gulp = require('gulp');
 const gulpBabel = require('gulp-babel');
+const gulpBeautify = require('gulp-beautify');
 const gulpPreProcess = require('gulp-preprocess');
 const gulpRename = require('gulp-rename');
 const gulpSourceMaps = require('gulp-sourcemaps');
 const gulpTerser = require('gulp-terser');
 const gulpUglify = require('gulp-uglify');
+
+const jsbeautifyrc = JSON.parse(fs.readFileSync('./.jsbeautifyrc', 'utf8'));
 
 function cleanup() {
 	return del('./dist');
@@ -14,6 +18,7 @@ function cleanup() {
 function nodeBuild() {
 	return gulp.src('./src/**/*.js')
 		.pipe(gulpPreProcess({ context: { TARGET: 'NODEJS', ES: 6, MODULE: 'COMMONJS' } }))
+		.pipe(gulpBeautify(jsbeautifyrc))
 		.pipe(gulp.dest('./dist/node/'));
 }
 
@@ -21,6 +26,7 @@ function browserEs5Build() {
 	return gulp.src('./src/**/*.js')
 		.pipe(gulpPreProcess({ context: { TARGET: 'BROWSER', ES: 5, MODULE: null } }))
 		.pipe(gulpBabel())
+		.pipe(gulpBeautify(jsbeautifyrc))
 		.pipe(gulp.dest('./dist/es5/'))
 		.pipe(gulpRename((path) => path.basename += '.min'))
 		.pipe(gulpSourceMaps.init())
@@ -32,6 +38,7 @@ function browserEs5Build() {
 function browserEs6Build() {
 	return gulp.src('./src/**/*.js')
 		.pipe(gulpPreProcess({ context: { TARGET: 'BROWSER', ES: 6, MODULE: null } }))
+		.pipe(gulpBeautify(jsbeautifyrc))
 		.pipe(gulp.dest('./dist/es6/'))
 		.pipe(gulpRename((path) => path.basename += '.min'))
 		.pipe(gulpSourceMaps.init())
@@ -43,6 +50,7 @@ function browserEs6Build() {
 function browserEs6ModuleBuild() {
 	return gulp.src('./src/**/*.js')
 		.pipe(gulpPreProcess({ context: { TARGET: 'BROWSER', ES: 6, MODULE: 'ES6' } }))
+		.pipe(gulpBeautify(jsbeautifyrc))
 		.pipe(gulp.dest('./dist/es6-module/'))
 		.pipe(gulpRename((path) => path.basename += '.min'))
 		.pipe(gulpSourceMaps.init())

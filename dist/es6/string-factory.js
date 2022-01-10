@@ -105,7 +105,7 @@ const StringFactory = (() => {
 		return `${quote}${value}${quote}`;
 	}
 
-	function func (args, body) {
+	function func(args, body) {
 		if (Array.isArray(args)) {
 			args = args.filter((child) => child !== null).join(', ');
 		}
@@ -125,7 +125,16 @@ const StringFactory = (() => {
 		return exp(`(() => { const expLoopValue = []; for(${loopExp}) { expLoopValue.push(${body}); } return expLoopValue.join(${quote(joiner)}); })()`);
 	}
 
-	return { tag, table, style, quote, func, exp, expIf, expLoop };
+	return {
+		tag,
+		table,
+		style,
+		quote,
+		func,
+		exp,
+		expIf,
+		expLoop
+	};
 })();
 
 /* exported StringFactory */
