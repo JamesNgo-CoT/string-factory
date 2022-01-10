@@ -1,6 +1,4 @@
-import  StringFactory from '../../dist/es6-module/string-factory.min.js';
-
-const { tag, table, style, quote, func, exp, expIf, expLoop } = StringFactory;
+import  { tag, table, style, quote, func, exp, expIf, expLoop } from '../../dist/es6-module/string-factory.min.js';
 
 ////////////////////////////////////////////////////////////////////////////////
 // TAG
