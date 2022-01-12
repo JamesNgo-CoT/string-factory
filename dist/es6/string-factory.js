@@ -124,6 +124,7 @@ const StringFactory = (() => {
 	function expLoop(loopExp, body, joiner = '') {
 		return exp(`(() => { const expLoopValue = []; for(${loopExp}) { expLoopValue.push(${body}); } return expLoopValue.join(${quote(joiner)}); })()`);
 	}
+
 	return {
 		tag,
 		table,
