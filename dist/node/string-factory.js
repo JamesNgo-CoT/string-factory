@@ -124,13 +124,4 @@ function expLoop(loopExp, body, joiner = '') {
 	return exp(`(() => { const expLoopValue = []; for(${loopExp}) { expLoopValue.push(${body}); } return expLoopValue.join(${quote(joiner)}); })()`);
 }
 
-module.exports = {
-	tag,
-	table,
-	style,
-	quote,
-	func,
-	exp,
-	expIf,
-	expLoop
-};
+module.exports = { tag, table, style, quote, func, exp, expIf, expLoop };
