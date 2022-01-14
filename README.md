@@ -1,22 +1,27 @@
 # string-factory
 
-Version 3.0.0
+Version 3.1.0
 
 ## Installation
 
 ```
-npm install git+https://github.com/JamesNgo-CoT/string-factory.git#3.0.0
+npm install git+https://github.com/JamesNgo-CoT/string-factory.git#3.1.0
 ```
 
 ## Usage
 
 ``` JavaScript
-// NodeJS
+// COMMONJS MODULE
 const { tag, table, style, quote, func, exp, expIf, expLoop } = require('string-factory');
 
 // or
 
-// Browser
+// ES6 MODULE
+import  { tag, table, style, quote, func, exp, expIf, expLoop } from './path/string-factory.min.js';
+
+// or
+
+// NO MODULE
 /* global StringFactory */
 const { tag, table, style, quote, func, exp, expIf, expLoop } = StringFactory;
 ```
