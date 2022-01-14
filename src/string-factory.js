@@ -126,10 +126,6 @@ function expIf(condition, trueValue, falseValue) {
 function expLoop(loopExp, body, joiner = '') {
 	return exp(`(() => { const expLoopValue = []; for(${loopExp}) { expLoopValue.push(${body}); } return expLoopValue.join(${quote(joiner)}); })()`);
 }
-/* @if MODULE=null **
-return { tag, table, style, quote, func, exp, expIf, expLoop };
-})();
-/* @endif */
 
 /* @if MODULE="COMMONJS" */
 module.exports = { tag, table, style, quote, func, exp, expIf, expLoop };
@@ -138,5 +134,8 @@ module.exports = { tag, table, style, quote, func, exp, expIf, expLoop };
 export { tag, table, style, quote, func, exp, expIf, expLoop };
 /* @endif */
 /* @if MODULE=null **
+return { tag, table, style, quote, func, exp, expIf, expLoop };
+})();
+
 /* exported StringFactory */
 /* @endif */
