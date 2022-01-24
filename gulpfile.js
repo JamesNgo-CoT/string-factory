@@ -16,14 +16,14 @@ function cleanup() {
 }
 
 function nodeBuild() {
-	return gulp.src('./src/**/*.js')
+	return gulp.src('./src/**/*.js', { since: gulp.lastRun(nodeBuild) })
 		.pipe(gulpPreProcess({ context: { TARGET: 'NODEJS', ES: 6, MODULE: 'COMMONJS' } }))
 		.pipe(gulpBeautify(jsbeautifyrc))
 		.pipe(gulp.dest('./dist/node/'));
 }
 
 function browserEs5Build() {
-	return gulp.src('./src/**/*.js')
+	return gulp.src('./src/**/*.js', { since: gulp.lastRun(browserEs5Build) })
 		.pipe(gulpPreProcess({ context: { TARGET: 'BROWSER', ES: 5, MODULE: null } }))
 		.pipe(gulpBabel())
 		.pipe(gulpBeautify(jsbeautifyrc))
@@ -36,7 +36,7 @@ function browserEs5Build() {
 }
 
 function browserEs6Build() {
-	return gulp.src('./src/**/*.js')
+	return gulp.src('./src/**/*.js', { since: gulp.lastRun(browserEs6Build) })
 		.pipe(gulpPreProcess({ context: { TARGET: 'BROWSER', ES: 6, MODULE: null } }))
 		.pipe(gulpBeautify(jsbeautifyrc))
 		.pipe(gulp.dest('./dist/es6/'))
@@ -48,7 +48,7 @@ function browserEs6Build() {
 }
 
 function browserEs6ModuleBuild() {
-	return gulp.src('./src/**/*.js')
+	return gulp.src('./src/**/*.js', { since: gulp.lastRun(browserEs6ModuleBuild) })
 		.pipe(gulpPreProcess({ context: { TARGET: 'BROWSER', ES: 6, MODULE: 'ES6' } }))
 		.pipe(gulpBeautify(jsbeautifyrc))
 		.pipe(gulp.dest('./dist/es6-module/'))

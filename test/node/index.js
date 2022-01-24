@@ -147,7 +147,7 @@ const { tag, table, style, quote, func, exp, expIf, expLoop } = require('../../i
 (() => {
 	console.log('\x1b[36mEXPIF\x1b[0m');
 
-	const content = func(['data'], quote([
+	const content = func(['data'], [quote([
 		tag('div', { class: 'class-name' }, [
 			tag('div', {}, [
 				expIf('data', [
@@ -157,7 +157,7 @@ const { tag, table, style, quote, func, exp, expIf, expLoop } = require('../../i
 				])
 			])
 		])
-	]));
+	])]);
 
 	console.log(content);
 	console.log();
@@ -171,7 +171,7 @@ const { tag, table, style, quote, func, exp, expIf, expLoop } = require('../../i
 (() => {
 	console.log('\x1b[36mEXPLOOP\x1b[0m');
 
-	const content = func(['data'], quote([
+	const content = func(['data'], [quote([
 		tag('div', { class: 'class-name' }, [
 			tag('div', [`data-count=${exp('data.length')}`], [
 				expLoop('let index = 0, length = data.length; index < length; index++', [
@@ -179,7 +179,7 @@ const { tag, table, style, quote, func, exp, expIf, expLoop } = require('../../i
 				], ', ')
 			])
 		])
-	]));
+	])]);
 
 	console.log(content);
 	console.log();
