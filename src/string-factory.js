@@ -111,6 +111,9 @@ function func(args, body) {
 	if (Array.isArray(args)) {
 		args = args.filter((child) => child !== null).join(', ');
 	}
+	if (Array.isArray(body)) {
+		body = body.join('');
+	}
 
 	return `(${args || ''}) => ${body}`;
 }
@@ -120,10 +123,21 @@ function exp(value) {
 }
 
 function expIf(condition, trueValue, falseValue) {
+	if (Array.isArray(trueValue)) {
+		trueValue = trueValue.join('');
+	}
+	if (Array.isArray(falseValue)) {
+		falseValue = falseValue.join('');
+	}
+
 	return exp(`${condition} ? ${trueValue} : ${falseValue}`);
 }
 
 function expLoop(loopExp, body, joiner = '') {
+	if (Array.isArray(body)) {
+		body = body.join('');
+	}
+
 	return exp(`(() => { const expLoopValue = []; for(${loopExp}) { expLoopValue.push(${body}); } return expLoopValue.join(${quote(joiner)}); })()`);
 }
 
